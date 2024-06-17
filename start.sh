@@ -1,1 +1,1 @@
-python zie-plate-admin/app.py
+python3 zie-plate-admin/app.py
