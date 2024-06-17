@@ -5,9 +5,7 @@ app = Flask(__name__)
 
 @app.route('/notification/user', methods=['POST','GET'])
 def notificate_user():
-    data = request.get_json()
-    print(data)
-    return jsonify(data)
+    return "Noticication for User"
 
 @app.route('/auth/token_verify', methods=['POST'])
 def token_verify():
