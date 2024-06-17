@@ -3,9 +3,9 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 
-@app.route('/notification/user', methods=['POST', 'GET'])
+@app.route('/webhook/user', methods=['POST', 'GET'])
 def notificate_user():
-    return "Noticication for User"
+    return {}
 
 
 @app.route('/auth/token_verify', methods=['POST'])
