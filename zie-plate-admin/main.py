@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 @app.route('/webhook/user', methods=['POST', 'GET'])
 def notificate_user():
-    return {}
+    hub_challenge = request.args.get('hub.challenge')
+    return hub_challenge
 
 
 @app.route('/auth/token_verify', methods=['POST'])
