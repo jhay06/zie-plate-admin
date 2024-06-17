@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 @app.route('/webhook/user', methods=['POST', 'GET'])
 def notificate_user():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        return jsonify(data)
     hub_challenge = request.args.get('hub.challenge')
     return hub_challenge
 
