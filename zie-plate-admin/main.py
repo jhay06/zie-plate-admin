@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 
-@app.route('/notification/user', methods=['POST'])
+@app.route('/notification/user', methods=['POST','GET'])
 def notificate_user():
     data = request.get_json()
     print(data)
