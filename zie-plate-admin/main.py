@@ -15,7 +15,7 @@ def stay_alive():
     while True:
         print('Stay Alive')
         requests.get('https://zie-plate-admin.glitch.me')
-        sleep(60 * 2)
+        sleep(2)
 
 
 @app.route('/webhook/page', methods=['POST', 'GET'])
