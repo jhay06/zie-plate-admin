@@ -1,16 +1,39 @@
 from flask import Flask, request, jsonify
+from threading import Thread
+import requests
 
 app = Flask(__name__)
 
 
-@app.route('/webhook/user', methods=['POST', 'GET'])
-def notificate_user():
+def stay_alive():
+    from time import sleep
+    while True:
+        print('Stay Alive')
+        requests.get('https://zie-plate-admin.glitch.me')
+        sleep(60 * 2)
+
+
+@app.route('/webhook/page', methods=['POST', 'GET'])
+def notification_page():
+    from app_code.page_controller import PageController
+    if request.method == 'GET':
+        try:
+            hub_mode = request.args.get('hub.mode')
+            if hub_mode == 'subscribe':
+                subscription_query = request.args
+                page_controller = PageController()
+                return page_controller.subscribe(subscription_query)
+            else:
+                return 'Invalid'
+        except Exception as e:
+            return 'Invalid'
     if request.method == 'POST':
-        data = request.get_json()
-        print(data)
-        return jsonify(data)
-    hub_challenge = request.args.get('hub.challenge')
-    return hub_challenge
+        try:
+            post_query = request.get_json()
+            page_controller = PageController()
+            return page_controller.process(post_query)
+        except Exception as e:
+            return 'Invalid'
 
 
 @app.route('/auth/token_verify', methods=['POST'])
@@ -34,3 +57,5 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    t = Thread(target=stay_alive)
+    t.start()
