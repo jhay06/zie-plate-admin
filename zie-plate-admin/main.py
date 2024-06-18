@@ -5,6 +5,11 @@ import requests
 app = Flask(__name__)
 
 
+def create_app():
+    t = Thread(target=stay_alive)
+    t.start()
+    return app
+
 def stay_alive():
     from time import sleep
     while True:
@@ -57,5 +62,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    t = Thread(target=stay_alive)
-    t.start()
+
