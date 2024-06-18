@@ -4,10 +4,11 @@ import requests
 
 app = Flask(__name__)
 
-
 def create_app():
+
     t = Thread(target=stay_alive)
     t.start()
+
     return app
 
 def stay_alive():
@@ -15,7 +16,7 @@ def stay_alive():
     while True:
         print('Stay Alive')
         requests.get('https://zie-plate-admin.glitch.me')
-        sleep(2)
+        sleep(60*2)
 
 
 @app.route('/webhook/page', methods=['POST', 'GET'])
